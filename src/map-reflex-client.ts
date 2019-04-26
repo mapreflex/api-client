@@ -1,5 +1,4 @@
-import superagent from 'superagent';
-import { Response } from 'superagent';
+import superagent, { Response } from 'superagent';
 import { Feature, FeatureCollection } from 'geojson';
 
 class MapReflexClient {
@@ -23,16 +22,12 @@ class MapReflexClient {
     return this.ajaxGet('/zcta/search/byZipCodes', params);
   }
 
-  async getStateGeoJsonByAbs(abbreviations: Array<string>): Promise<FeatureCollection> {
+  async getStateGeoJsonByAbs(abbreviations: Array<string>): Promise<Response> {
     const params = {
       'abbreviations': abbreviations.join(',')
     };
 
-    return this.ajaxGet('/states/search/byAbs', params).then((response: Response) => {
-      return new Promise((resolve, reject) => {
-        resolve(response.body as FeatureCollection);
-      });
-    });
+    return this.ajaxGet('/states/search/byAbs', params)
   }
 
   private async ajaxGet(url: string, params: { [key: string]: string }): Promise<Response> {
