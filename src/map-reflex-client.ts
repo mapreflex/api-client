@@ -1,42 +1,39 @@
-import superagent, { Response } from 'superagent';
-import { Feature, FeatureCollection } from 'geojson';
+import superagent, { Response } from 'superagent'
+import { MapReflexOptions } from './models/MapReflexOptions'
+import { Zctas } from './endpoints/Zctas'
+import { States } from './endpoints/States'
+import { Counties } from './endpoints/Counties'
 
 class MapReflexClient {
-  private apiKey: string = '';
-  private apiUrl: string = 'http://localhost:8033/api';
-  private apiVer: string = '/v1';
-  private region: string = '/us';
-  private headerKey: string = 'X-Mapreflex-Key';
-  private baseUrl: string = '';
+  private apiKey: string = ''
+  private baseUrl: string = ''
 
-  constructor(apiKey: string, options: {}) {
-    this.apiKey = apiKey;
-    this.baseUrl = `${this.apiUrl}${this.apiVer}${this.region}`;
+  zctas: Zctas = new Zctas(this)
+  states: States = new States(this)
+  counties: Counties = new Counties(this)
+
+  private options: MapReflexOptions
+  private defaultOptions: MapReflexOptions = {
+    apiVersion: '/v1',
+    apiUrl: ' https://www.mapreflex.com/api',
+    country: '/us',
+    authHeader: 'X-Mapreflex-Key',
+    acceptHeader: 'application/json'
   }
 
-  async getZipsGeoJsonByZipCodes(zipCodes: Array<string>): Promise<Response> {
-    const params = {
-      'zipCodes': zipCodes.join(',')
-    };
-
-    return this.ajaxGet('/zcta/search/byZipCodes', params);
+  constructor(apiKey: string, options: MapReflexOptions = {} as MapReflexOptions) {
+    this.apiKey = apiKey
+    this.options = { ...this.defaultOptions, ...options }
+    this.baseUrl = `${this.options.apiUrl}${this.options.apiVersion}${this.options.country}`
   }
 
-  async getStateGeoJsonByAbs(abbreviations: Array<string>): Promise<Response> {
-    const params = {
-      'abbreviations': abbreviations.join(',')
-    };
-
-    return this.ajaxGet('/states/search/byAbs', params)
-  }
-
-  private async ajaxGet(url: string, params: { [key: string]: string }): Promise<Response> {
+  async get(url: string, params: { [key: string]: string }): Promise<Response> {
     return superagent
       .get(`${this.baseUrl}${url}`)
       .query(params)
-      .set(this.headerKey, this.apiKey)
-      .set('Accept', 'application/json');
+      .set(this.options.authHeader, this.apiKey)
+      .set('Accept', this.options.acceptHeader)
   }
 }
 
-export default MapReflexClient;
+export default MapReflexClient

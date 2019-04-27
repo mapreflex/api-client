@@ -50,10 +50,10 @@ Not using a module bundler? No problem! If you include MapReflexClient using a `
 
 ### Methods
 
-##### `getZipsGeoJsonByZipCodes(zipCodes: Array<string>)`
+##### `zctas.getGeojsonByZipCodes(zipCodes: Array<string>)`
 Get geometry of Zcta by zipCodes array
 
-##### `getStateGeoJsonByAbs(abbreviations: Array<string>)`
+##### `states.getByAbs(abbreviations: Array<string>)`
 Get geometry of states by name abbreviations
 
 ## jQuery
