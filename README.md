@@ -7,6 +7,56 @@
 # MapReflex Client
 A light client for
 
+## For Development
+
+This chapter intended for 'api-client' developers who also run 'MapReflex API server' locally.
+
+When you run `index.html` from file system and 'MapReflex API server' locally (on the same host), every request will send `null` value in `Origin`header, which will cause CORS errors.
+   
+In order to avoid such CORS errors, `index.html` and `dist` folder should be hosted on any web server.
+
+##### Setup a Simple HTTP Server with NodeJS #####
+
+1. Download and Install NodeJS if needed.
+
+2. Install the http-server package from npm:
+
+   ```shell
+   npm install -g http-server
+   ```
+
+3. Copy `index.html` and `dist` folder to your local file system. For example: `C:\projects\mapreflex-client-api`
+
+4. Start a web server from a directory containing static website files.
+
+   Change to the directory containing your static web files:
+   ```shell
+   cd C:\projects\mapreflex-client-api
+   ```
+   
+   Start the server with this command:
+   
+   ```shell
+   http-server
+   ```
+   
+   You should see something like the following:
+   
+   ```shell
+   C:\projects\mapreflex-client-api>http-server
+   Starting up http-server, serving ./
+   Available on:
+     http://192.168.0.5:8080
+     http://127.0.0.1:8080
+   Hit CTRL-C to stop the server
+   ```
+   
+5. Browse to your local website with a browser
+    http://192.168.0.5:8080/index.html or http://localhost:8080/index.html
+
+
+## Library Usage 
+
 ### Installation
 
 MapReflexClient is available on NPM. To install it open a terminal and run…

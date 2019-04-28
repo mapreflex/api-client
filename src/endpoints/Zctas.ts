@@ -21,8 +21,8 @@ export class Zctas extends Endpoint {
 
   async getByCountyAndState(county: string, state: string): Promise<Response> {
     const params = {
-      name: county.toLowerCase(),
-      state: state.toLocaleUpperCase()
+      county: county.toLowerCase(),
+      stateAb: state.toLocaleUpperCase()
     }
 
     return this.client.get(`${this.ZCTA_SEARCH_PATH}/byCountyAndState${this.ENTITY_PATH}`, params)
