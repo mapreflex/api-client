@@ -1,38 +1,31 @@
-import superagent, { Response } from 'superagent'
-import { MapReflexOptions } from './models/MapReflexOptions'
-import { Zctas } from './endpoints/Zctas'
-import { States } from './endpoints/States'
-import { Counties } from './endpoints/Counties'
+import { Zctas } from './endpoint/Zctas'
+import { States } from './endpoint/States'
+import { Counties } from './endpoint/Counties'
+import { MapReflexOptions, Options } from './models/Options'
+import { Http } from './endpoint/Http'
+
+const defaultOptions: MapReflexOptions = {
+  apiVersion: '/v1',
+  apiUrl: ' https://www.mapreflex.com',
+  apiEndpoint: '/api',
+  country: '/us',
+  authHeader: 'X-Mapreflex-Key',
+  acceptHeader: 'application/json',
+  apiKey: ''
+}
 
 class MapReflexClient {
-  private apiKey: string = ''
-  private baseUrl: string = ''
+  options: MapReflexOptions
 
-  zctas: Zctas = new Zctas(this)
-  states: States = new States(this)
-  counties: Counties = new Counties(this)
+  zctas: Zctas
+  states: States
+  counties: Counties
 
-  private options: MapReflexOptions
-  private defaultOptions: MapReflexOptions = {
-    apiVersion: '/v1',
-    apiUrl: ' https://www.mapreflex.com/api',
-    country: '/us',
-    authHeader: 'X-Mapreflex-Key',
-    acceptHeader: 'application/json'
-  }
-
-  constructor(apiKey: string, options: MapReflexOptions = {} as MapReflexOptions) {
-    this.apiKey = apiKey
-    this.options = { ...this.defaultOptions, ...options }
-    this.baseUrl = `${this.options.apiUrl}${this.options.apiVersion}${this.options.country}`
-  }
-
-  async get(url: string, params: { [key: string]: string }): Promise<Response> {
-    return superagent
-      .get(`${this.baseUrl}${url}`)
-      .query(params)
-      .set(this.options.authHeader, this.apiKey)
-      .set('Accept', this.options.acceptHeader)
+  constructor(options?: Options) {
+    this.options = { ...defaultOptions, ...(options || {}) }
+    this.zctas = new Zctas(new Http(this.options))
+    this.states = new States(new Http(this.options))
+    this.counties = new Counties(new Http(this.options))
   }
 }
 

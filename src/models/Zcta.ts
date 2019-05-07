@@ -9,3 +9,11 @@ export interface Zcta {
   geometry: MultiPolygon
   centroid: Point
 }
+
+export interface ZctaProperties {
+  geoid: string
+  zip: string
+  aland: number
+  awater: number
+  centroid: Point
+}

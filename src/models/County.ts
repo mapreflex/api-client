@@ -13,3 +13,11 @@ export interface County {
   geometry: MultiPolygon
   centroid: Point
 }
+
+export interface CountyProperties {
+  name: string
+  geoid: string
+  aland: number
+  awater: number
+  centroid: Point
+}

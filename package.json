@@ -1,6 +1,6 @@
 {
-  "name": "mapreflex-client",
-  "version": "0.0.0",
+  "name": "@mapreflex/api-client",
+  "version": "0.0.1",
   "description": "",
   "keywords": [],
   "main": "dist/mapreflex-client.umd.js",
@@ -12,7 +12,7 @@
   "author": "Andrii Martyniuk <amartyniuk@codevision.com.ua>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "mapreflex/api-client"
   },
   "license": "MIT",
   "engines": {
