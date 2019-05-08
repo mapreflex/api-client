@@ -1,18 +1,22 @@
 {
   "name": "@mapreflex/api-client",
   "version": "0.0.1",
-  "description": "",
-  "keywords": [],
-  "main": "dist/mapreflex-client.umd.js",
-  "module": "dist/mapreflex-client.es5.js",
-  "typings": "dist/types/mapreflex-client.d.ts",
+  "description": "Mapreflex api client",
+  "keywords": [
+    "mapreflex",
+    "api client",
+    "rest client"
+  ],
+  "main": "mapreflex-client.umd.js",
+  "module": "mapreflex-client.es5.js",
+  "typings": "types/mapreflex-client.d.ts",
   "files": [
-    "dist"
+    "./"
   ],
   "author": "Andrii Martyniuk <amartyniuk@codevision.com.ua>",
   "repository": {
     "type": "git",
-    "url": "mapreflex/api-client"
+    "url": "https://github.com/mapreflex/api-client"
   },
   "license": "MIT",
   "engines": {
@@ -22,16 +26,13 @@
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
+    "postbuild": "node scripts/copy",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watch",
     "test:prod": "npm run lint && npm run test -- --no-cache",
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
-    "commit": "git-cz",
-    "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-    "precommit": "lint-staged",
     "travis-deploy-once": "travis-deploy-once"
   },
   "lint-staged": {

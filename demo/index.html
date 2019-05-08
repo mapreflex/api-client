@@ -15,7 +15,7 @@
 <div id="map"></div>
 <script type="text/javascript">
   var map;
-  var api = new MapReflexClient({apiKey: 'MAPREFLEX_API_KEY'});
+  var api = new MapreflexClient({apiKey: 'MAPREFLEX_KEY'});
 
   function initMap() {
     var zoom = 12;
@@ -41,10 +41,10 @@
       var ne = map.getBounds().getNorthEast();
       var northEase = [ne.lat(), ne.lng()];
       var sonthwest = [sw.lat(), sw.lng()];
-      api.zctas.getGeojsonInBoundingBox(northEase, sonthwest)
+      api.zctas.getInBoundingBox(northEase, sonthwest)
         .then(function (geojson) {
           drawBoundaries(geojson, map);
-          console.log(res);
+          // console.log(geojson);
         }, function (err) {
           console.log(err.message);
         })
@@ -54,7 +54,10 @@
   function drawBoundaries(goeJson, map) {
     map.data.addGeoJson(goeJson, {idPropertyName: "geoid"});
   }
+  api.states.getByStateAb('NY').then(function (res) {
+    console.log(res)
+  });
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAP_API_KEY&callback=initMap" async
+<script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&callback=initMap" async
         defer></script>
 </html>

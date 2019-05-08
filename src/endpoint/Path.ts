@@ -1,10 +1,10 @@
 export class Path {
   static readonly STATES_PATH: string = '/states'
-  static readonly STATES_SEARCH_PATH: string = Path.STATES_PATH + '/search'
+  static readonly STATES_SEARCH_PATH: string = `${Path.STATES_PATH}/search`
   static readonly ZCTA_PATH: string = '/zcta'
-  static readonly ZCTA_SEARCH_PATH: string = Path.ZCTA_PATH + '/search'
+  static readonly ZCTA_SEARCH_PATH: string = `${Path.ZCTA_PATH}/search`
   static readonly COUNTIES_PATH: string = '/counties'
-  static readonly COUNTIES_SEARCH_PATH: string = Path.COUNTIES_PATH + '/search'
+  static readonly COUNTIES_SEARCH_PATH: string = `${Path.COUNTIES_PATH}/search`
   static readonly ENTITY_PATH: string = '/entity'
   static readonly IN_RADIUS_PATH: string = '/inRadius'
   static readonly IN_BOUNDING_BOX_PATH: string = '/inBoundingBox'

@@ -1,11 +1,11 @@
 import superagent, { Response } from 'superagent'
 
-import { MapReflexOptions } from '../models/Options'
+import { MapreflexOptions } from '../interfaces/Options'
 
 export class Http {
-  private options: MapReflexOptions
+  private options: MapreflexOptions
 
-  constructor(options: MapReflexOptions) {
+  constructor(options: MapreflexOptions) {
     this.options = options
   }
 

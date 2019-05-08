@@ -1,4 +1,4 @@
-export interface MapReflexOptions {
+export interface MapreflexOptions {
   apiKey: string
   apiUrl: string
   apiEndpoint: string
@@ -8,4 +8,4 @@ export interface MapReflexOptions {
   acceptHeader: string
 }
 
-export interface Options extends Partial<MapReflexOptions> {}
+export interface Options extends Partial<MapreflexOptions> {}

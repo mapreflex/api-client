@@ -1,4 +1,4 @@
-import MapReflexClient from '../src/map-reflex-client'
+import Index from '../src/map-reflex-client'
 
 /**
  * MapReflexClient test
@@ -6,6 +6,6 @@ import MapReflexClient from '../src/map-reflex-client'
 describe('MapReflexClient', () => {
   const TEST_KEY: string = 'sdfsdfaf'
   it('MapReflexClient class is instantiable', () => {
-    expect(new MapReflexClient(TEST_KEY)).toBeInstanceOf(MapReflexClient)
+    expect(new Index(TEST_KEY)).toBeInstanceOf(Index)
   })
 })

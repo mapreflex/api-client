@@ -12,7 +12,7 @@ export interface State {
 export interface StateProperties {
   name: string
   statens: string
-  fips_code: string
+  fipsCode: string
   stusab: string
   centroid: Point
 }

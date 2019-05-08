@@ -102,63 +102,29 @@ Not using a module bundler? No problem! If you include MapReflexClient using a `
 
 #### Zctas
 
-##### `getGeojsonByZipCode(zipCode: string): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`
-    
-##### `getByZipCode(zipCode: string): Promise<Zcta>`
-    
-##### `getByCountyNameAndStateAb(countyName: string, stateAb: string): Promise<Array<Zcta>>`
-    
-##### `getByGeoId(geoId: string): Promise<Zcta>`
-
-##### `getGeojsonByZipCodes(zipCodes: Array<string>): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`
-
-##### `getGeojsonInBoundingBox(northEast: Array<number>, southWest: Array<number>, intersect?: boolean): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`
-
-##### `getInBoundingBox(northEast: Array<number>, southWest: Array<number>, intersect?: boolean): Promise<Array<Zcta>>`
-
-##### `getGeojsonInRadius(latitude: number, longitude: number, radius: number): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`
-    
-##### `getInRadius(latitude: number, longitude: number, radius: number): Promise<Array<Zcta>>`
+##### `getByZipCode(zipCode: string): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`
+##### `getByCountyGeoId(countyGeoId: string): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`
+##### `getByCountyNameAndStateAb(countyName: string, stateAb: string): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`
+##### `getByZipCodes(zipCodes: string[]): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`   
+##### `getInBoundingBox(northEast: number[], southWest: number[], intersect?: boolean): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`
+##### `getInRadius(latitude: number, longitude: number, radius: number): Promise<FeatureCollection<MultiPolygon, ZctaProperties>>`
 
 #### Counties
 
-##### `getByStateAb(abbreviation: string): Promise<Array<County>>`
-
-##### `getGeojsonByGeoId(geoId: string): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
-
-##### `getByGeoId(geoId: string): Promise<County>`
-    
-##### `getGeojsonByCountyNameAndStateAb(countyName: string, stateAb: string): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
-   
-##### `getByCountyNameAndStateAb(countyName: string, stateAb: string): Promise<County>`
-   
-##### `getGeojsonByCountyNames(countyNames: Array<string>): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
-
-##### `getGeojsonByStateAbs(abbreviations: Array<string>): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
-
-##### `getGeojsonInBoundingBox(northEast: Array<number>, southWest: Array<number>, intersect?: boolean): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
-
-##### `getInBoundingBox(northEast: Array<number>, southWest: Array<number>, intersect?: boolean): Promise<Array<County>>`
-
-##### `getGeojsonInRadius(latitude: number, longitude: number, radius: number): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
-
-##### `getInRadius(latitude: number, longitude: number, radius: number): Promise<Array<County>>`
+##### `getByGeoId(geoId: string): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
+##### `getByGeoIds(geoIds: string[]): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
+##### `getByCountyNameAndStateAb(countyName: string, stateAb: string): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
+##### `getByCountyNames(countyNames: string[]): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
+##### `getByStateAb(stateAb: string): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
+##### `getInBoundingBox(northEast: number[], southWest: number[], intersect?: boolean): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
+##### `getInRadius(latitude: number, longitude: number, radius: number): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
 
 #### States
 
-##### `getByStateAb(abbreviation: string): Promise<State>`
-
-##### `getAll(): Promise<Array<State>>`
-
-##### `getGeojsonByStateAbs(abbreviations: Array<string>): Promise<FeatureCollection<MultiPolygon, StateProperties>>`
-
-##### `getGeojsonInBoundingBox(northEast: Array<number>, southWest: Array<number>, intersect?: boolean): Promise<FeatureCollection<MultiPolygon, StateProperties>>`
-
-##### `getInBoundingBox(northEast: Array<number>, southWest: Array<number>, intersect?: boolean): Promise<Array<State>>`
-   
-##### `getGeojsonInRadius(latitude: number, longitude: number, radius: number): Promise<FeatureCollection<MultiPolygon, StateProperties>>`
-
-##### `getInRadius(latitude: number, longitude: number, radius: number): Promise<Array<State>>`
+##### `getByStateAb(abbreviation: string): Promise<FeatureCollection<MultiPolygon, StateProperties>>`
+##### `getByStateAbs(abbreviations: string[]): Promise<FeatureCollection<MultiPolygon, StateProperties>>`
+##### `getInBoundingBox(northEast: number[], southWest: number[], intersect?: boolean): Promise<FeatureCollection<MultiPolygon, StateProperties>>`
+##### `getInRadius(latitude: number, longitude: number, radius: number): Promise<FeatureCollection<MultiPolygon, StateProperties>>`
 
 ## jQuery
 

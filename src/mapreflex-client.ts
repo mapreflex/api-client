@@ -1,10 +1,10 @@
 import { Zctas } from './endpoint/Zctas'
 import { States } from './endpoint/States'
 import { Counties } from './endpoint/Counties'
-import { MapReflexOptions, Options } from './models/Options'
+import { MapreflexOptions, Options } from './interfaces/Options'
 import { Http } from './endpoint/Http'
 
-const defaultOptions: MapReflexOptions = {
+const defaultOptions: MapreflexOptions = {
   apiVersion: '/v1',
   apiUrl: ' https://www.mapreflex.com',
   apiEndpoint: '/api',
@@ -14,8 +14,8 @@ const defaultOptions: MapReflexOptions = {
   apiKey: ''
 }
 
-class MapReflexClient {
-  options: MapReflexOptions
+class MapreflexClient {
+  options: MapreflexOptions
 
   zctas: Zctas
   states: States
@@ -29,4 +29,4 @@ class MapReflexClient {
   }
 }
 
-export default MapReflexClient
+export default MapreflexClient
