@@ -1,67 +1,23 @@
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Greenkeeper badge](https://badges.greenkeeper.io/mapreflex/api-client.svg)](https://greenkeeper.io/)
 [![Travis](https://img.shields.io/travis/mapreflex/api-client.svg)](https://travis-ci.org/mapreflex/api-client)
 [![Coveralls](https://img.shields.io/coveralls/mapreflex/api-client.svg)](https://coveralls.io/github/mapreflex/api-client)
 [![Dev Dependencies](https://david-dm.org/mapreflex/api-client/dev-status.svg)](https://david-dm.org/mapreflex/api-client?type=dev)
 
 # Mapreflex Client
-A light client for
+A light js client for mapreflex service
 
-## For Development
+### Documentation 
+> [Api documentation](https://www.mapreflex.com/swagger-ui.html). 
 
-This chapter intended for 'api-client' developers who also run 'MapReflex API server' locally.
+### API key
 
-When you run `index.html` from file system and 'MapReflex API server' locally (on the same host), every request will send `null` value in `Origin`header, which will cause CORS errors.
-   
-In order to avoid such CORS errors, `index.html` and `dist` folder should be hosted on any web server.
-
-##### Setup a Simple HTTP Server with NodeJS #####
-
-1. Download and Install NodeJS if needed.
-
-2. Install the http-server package from npm:
-
-   ```shell
-   npm install -g http-server
-   ```
-
-3. Copy `index.html` and `dist` folder to your local file system. For example: `C:\projects\mapreflex-client-api`
-
-4. Start a web server from a directory containing static website files.
-
-   Change to the directory containing your static web files:
-   ```shell
-   cd C:\projects\mapreflex-client-api
-   ```
-   
-   Start the server with this command:
-   
-   ```shell
-   http-server
-   ```
-   
-   You should see something like the following:
-   
-   ```shell
-   C:\projects\mapreflex-client-api>http-server
-   Starting up http-server, serving ./
-   Available on:
-     http://192.168.0.5:8080
-     http://127.0.0.1:8080
-   Hit CTRL-C to stop the server
-   ```
-   
-5. Browse to your local website with a browser
-    http://192.168.0.5:8080/index.html or http://localhost:8080/index.html
-
-
-## Library Usage 
+You should generate the api key on [Mapreflex cabinet](https://www.mapreflex.com)
 
 ### Installation
 
 MapReflexClient is available on NPM. To install it open a terminal and run…
 ```shell
-npm install @mapreflex/api-client  --save
+npm install @mapreflex/api-client --save
 ```
 
 Not using NPM? While I would **strongly** recommend you to use NPM to manage your app's dependencies, you can still [download it manually](https://unpkg.com/@maprelfex/api-client/dist/mapreflex-client.umd.js).
@@ -114,7 +70,6 @@ Not using a module bundler? No problem! If you include MapReflexClient using a `
 ##### `getByGeoId(geoId: string): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
 ##### `getByGeoIds(geoIds: string[]): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
 ##### `getByCountyNameAndStateAb(countyName: string, stateAb: string): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
-##### `getByCountyNames(countyNames: string[]): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
 ##### `getByStateAb(stateAb: string): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
 ##### `getInBoundingBox(northEast: number[], southWest: number[], intersect?: boolean): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
 ##### `getInRadius(latitude: number, longitude: number, radius: number): Promise<FeatureCollection<MultiPolygon, CountyProperties>>`
@@ -129,3 +84,16 @@ Not using a module bundler? No problem! If you include MapReflexClient using a `
 ## jQuery
 
 If you're upset that I decided to ditch jQuery don't be. I plan to write a wrapper and enable MapReflexClient to work as a jQuery plugin, though the API will break, that's for sure. You'll need to update your code if you plan to upgrade.
+
+### Contribute
+
+#### Building the library
+Run npm install on repository root
+```
+npm install
+```
+#### For run demo you should bind the library
+```shell
+npm run build
+npm run demo-server
+```

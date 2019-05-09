@@ -111,7 +111,7 @@ export class Zctas {
   ): Promise<FeatureCollection<MultiPolygon, ZctaProperties>> {
     const params = {
       latitude: latitude.toString(),
-      longitude: latitude.toString(),
+      longitude: longitude.toString(),
       radius: radius.toString()
     }
 

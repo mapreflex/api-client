@@ -82,7 +82,7 @@ export class States {
   ): Promise<FeatureCollection<MultiPolygon, StateProperties>> {
     const params = {
       latitude: latitude.toString(),
-      longitude: latitude.toString(),
+      longitude: longitude.toString(),
       radius: radius.toString()
     }
     return this.http.get<FeatureCollection<MultiPolygon, StateProperties>>(

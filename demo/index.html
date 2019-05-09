@@ -3,30 +3,175 @@
 <head>
   <title>Mapreflex client Demo</title>
   <style>
-    #map {
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+    h2 {
+      padding-left: 12px;
+    }
+    .container {
+      overflow: hidden;
+    }
+    .row {
+      display: flex;
+      margin: 0 -20px;
+      flex-wrap: wrap;
+    }
+
+    .col-50 {
+      width: 50%;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .map {
       height: 500px;
     }
   </style>
 </head>
 <body>
-<!-- Your regular body -->
-<script type="text/javascript" src="dist/mapreflex-client.umd.js"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-50">
+      <h2>Zcta in Bounding box</h2>
+      <div class="map" id="zctabox">Loading...</div>
+    </div>
+    <div class="col-50">
+      <h2>Zcta in Radius</h2>
+      <div class="map" id="zctaradius">Loading...</div>
+    </div>
+    <div class="col-50">
+      <h2>County in Bounding box</h2>
+      <div class="map" id="countybox">Loading...</div>
+    </div>
+    <div class="col-50">
+      <h2>County in Radius</h2>
+      <div class="map" id="countyradius">Loading...</div>
+    </div>
+    <div class="col-50">
+      <h2>States in Bounding box</h2>
+      <div class="map" id="statebox">Loading...</div>
+    </div>
+    <div class="col-50">
+      <h2>States in Radius</h2>
+      <div class="map" id="stateradius">Loading...</div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../dist/mapreflex-client.umd.js"></script>
 </body>
-<div id="map"></div>
-<script type="text/javascript">
-  var map;
-  var api = new MapreflexClient({apiKey: 'MAPREFLEX_KEY'});
 
-  function initMap() {
-    var zoom = 12;
-    var areasStyleOptions = {
-      strokeColor: '#6e696c',
-      fillColor: '#ff6d00'
-    };
-    map = new google.maps.Map(document.getElementById('map'), {
+<script type="text/javascript">
+  var api = new MapreflexClient({apiKey: 'API_KEY');
+  var areasStyleOptions = {
+    strokeColor: '#6e696c',
+    fillColor: '#ff6d00'
+  };
+
+  function mapReady() {
+    //Zcta in bounding box
+    initMap('zctabox', 12, function (map) {
+      google.maps.event.addListener(map, "idle", function () {
+        var sw = map.getBounds().getSouthWest();
+        var ne = map.getBounds().getNorthEast();
+        var northEase = [ne.lat(), ne.lng()];
+        var sonthwest = [sw.lat(), sw.lng()];
+        api.zctas.getInBoundingBox(northEase, sonthwest)
+          .then(function (geojson) {
+            drawBoundaries(geojson, map);
+            // console.log(geojson);
+          }, function (err) {
+            console.log(err);
+          })
+      });
+    });
+
+    //Zcta in radius
+    initMap('zctaradius', 12, function (map) {
+      google.maps.event.addListener(map, "idle", function () {
+        api.zctas.getInRadius(40.730610, -73.935242, 10).then(function (geojson) {
+          drawBoundaries(geojson, map);
+        }, function (err) {
+          console.log(err);
+        })
+      })
+    })
+
+    //County in bounding box
+    initMap('countybox', 10, function (map) {
+      google.maps.event.addListener(map, "idle", function () {
+        var sw = map.getBounds().getSouthWest();
+        var ne = map.getBounds().getNorthEast();
+        var northEase = [ne.lat(), ne.lng()];
+        var sonthwest = [sw.lat(), sw.lng()];
+        api.counties.getInBoundingBox(northEase, sonthwest)
+          .then(function (geojson) {
+            drawBoundaries(geojson, map);
+            // console.log(geojson);
+          }, function (err) {
+            console.log(err);
+          })
+      });
+    });
+
+    //County in radius
+    initMap('countyradius', 12, function (map) {
+      google.maps.event.addListener(map, "idle", function () {
+        api.counties.getInRadius(40.730610, -73.935242, 10).then(function (geojson) {
+          drawBoundaries(geojson, map);
+        }, function (err) {
+          console.log(err);
+        })
+      })
+    })
+
+    //State in bounding box
+    initMap('statebox', 11, function (map) {
+      google.maps.event.addListener(map, "idle", function () {
+        var sw = map.getBounds().getSouthWest();
+        var ne = map.getBounds().getNorthEast();
+        var northEase = [ne.lat(), ne.lng()];
+        var sonthwest = [sw.lat(), sw.lng()];
+        api.states.getInBoundingBox(northEase, sonthwest)
+          .then(function (geojson) {
+            drawBoundaries(geojson, map);
+            // console.log(geojson);
+          }, function (err) {
+            console.log(err);
+          })
+      });
+    });
+
+
+    //County in radius
+    initMap('stateradius', 12, function (map) {
+      google.maps.event.addListener(map, "idle", function () {
+        api.states.getInRadius(40.730610, -73.935242, 15).then(function (geojson) {
+          drawBoundaries(geojson, map);
+        }, function (err) {
+          console.log(err);
+        })
+      })
+    })
+  }
+
+  function initMap(elementId, zoom, callback) {
+    var map;
+    var mapElement = document.getElementById(elementId);
+    map = new google.maps.Map(mapElement, {
       center: {lat: 40.730610, lng: -73.935242}, // New Your city coordinates
       zoom: zoom
     });
+    setMapStyle(map);
+    callback.call(this, map);
+  }
+
+  function drawBoundaries(goeJson, map) {
+    map.data.addGeoJson(goeJson, {idPropertyName: "geoid"});
+  }
+
+  function setMapStyle(map) {
     map.data.setStyle(function (feature) {
       return {
         strokeColor: areasStyleOptions.strokeColor,
@@ -36,28 +181,13 @@
         fillOpacity: 0.2
       }
     });
-    google.maps.event.addListener(map, "idle", function () {
-      var sw = map.getBounds().getSouthWest();
-      var ne = map.getBounds().getNorthEast();
-      var northEase = [ne.lat(), ne.lng()];
-      var sonthwest = [sw.lat(), sw.lng()];
-      api.zctas.getInBoundingBox(northEase, sonthwest)
-        .then(function (geojson) {
-          drawBoundaries(geojson, map);
-          // console.log(geojson);
-        }, function (err) {
-          console.log(err.message);
-        })
-    });
   }
 
-  function drawBoundaries(goeJson, map) {
-    map.data.addGeoJson(goeJson, {idPropertyName: "geoid"});
-  }
   api.states.getByStateAb('NY').then(function (res) {
     console.log(res)
   });
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&callback=initMap" async
+<script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAP_KEY&callback=mapReady"
+        async
         defer></script>
 </html>

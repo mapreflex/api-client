@@ -61,25 +61,6 @@ export class Counties {
   }
 
   /**
-   * @deprecated
-   * @param {string[]} countyNames (Adair, etc)
-   * @return {Promise<FeatureCollection<MultiPolygon, CountyProperties>>}
-   */
-  async getByCountyNames(
-    countyNames: string[]
-  ): Promise<FeatureCollection<MultiPolygon, CountyProperties>> {
-    isArray(countyNames)
-    const params = {
-      names: countyNames.join(',')
-    }
-
-    return this.http.get<FeatureCollection<MultiPolygon, CountyProperties>>(
-      `${Path.COUNTIES_SEARCH_PATH}/byNames`,
-      params
-    )
-  }
-
-  /**
    * @param {string} stateAb (NY,KY,AI, etc)
    * @return {Promise<FeatureCollection<MultiPolygon, CountyProperties>>}
    */
@@ -132,7 +113,7 @@ export class Counties {
   ): Promise<FeatureCollection<MultiPolygon, CountyProperties>> {
     const params = {
       latitude: latitude.toString(),
-      longitude: latitude.toString(),
+      longitude: longitude.toString(),
       radius: radius.toString()
     }
     return this.http.get<FeatureCollection<MultiPolygon, CountyProperties>>(
