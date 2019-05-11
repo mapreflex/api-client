@@ -1,3 +1,5 @@
+import MapreflexClient from  './mapreflex-client';
+
 export { Zctas } from './endpoint/Zctas'
 export { States } from './endpoint/States'
 export { Counties } from './endpoint/Counties'
@@ -8,4 +10,4 @@ export { State, StateProperties } from './interfaces/State'
 export { Options, MapreflexOptions } from './interfaces/Options'
 export { FeatureCollection, MultiPolygon, Point } from 'geojson'
 
-export * from './mapreflex-client';
+export default MapreflexClient;
