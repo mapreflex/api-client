@@ -9,7 +9,7 @@
   ],
   "main": "dist/mapreflex-client.umd.js",
   "module": "dist/mapreflex-client.es5.js",
-  "typings": "dist/types/mapreflex-client.d.ts",
+  "typings": "dist/types",
   "files": [
     "dist"
   ],
