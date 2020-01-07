@@ -124,6 +124,6 @@
   "dependencies": {
     "@types/geojson": "^7946.0.7",
     "@types/superagent": "^4.1.1",
-    "superagent": "^5.0.2"
+    "superagent": "^5.2.1"
   }
 }
